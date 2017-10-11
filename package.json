@@ -5,11 +5,12 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "?.git"
+    "url": "https://github.com/Danny-Engelman/ELworkflows.git"
   },
   "author": "Danny Engelman",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-coffee": "^2.3.4",
     "gulp-util": "^3.0.8"
   }
 }
