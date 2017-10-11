@@ -1,3 +1,5 @@
+$ = require('jquery');
+
 $(function() {
   var Mustache = require('mustache');
  
