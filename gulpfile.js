@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     coffee = require('gulp-coffee'),
     browserify = require('browserify'),
+    compass = require('gulp-compass'),
     concat = require('gulp-concat'),
     tap = require('gulp-tap'),
     buffer = require('gulp-buffer'),
@@ -15,6 +16,8 @@ var gulp = require('gulp'),
   'components/scripts/tagline.js',
   'components/scripts/template.js'
 ];
+
+var sassSources = ['components/sass/style.scss'];
 
 gulp.task('coffee', function() {
   gulp.src(coffeeSources)
@@ -42,23 +45,21 @@ gulp.task('js', function () {
         .pipe(gulp.dest('builds/development/js'));
     });
 
-gulp.task('js1', function() {
+gulp.task('js_course', function() {
   gulp.src(jsSources)
     .pipe(concat('script.js'))
     //.pipe(browserify())
     .pipe(gulp.dest('builds/development/js'))
 });
 
-
-gulp.task('bs', function () {
-  var b = browserify({
-    entries: './builds/development/js/script.js', // Only need initial file, browserify finds the deps
-    debug: true        // Enable sourcemaps
-  });
-
-  return b.bundle()
-//    .pipe(source('./builds/development/js/script.js')) // destination file for browserify, relative to gulp.dest
-    // .pipe(buffer())
-    // .pipe(uglify())
-    //.pipe(gulp.dest('.'));
+gulp.task('compass', function() {
+  gulp.src(sassSources)
+    .pipe(compass({
+      sass: 'components/sass',
+      image: 'builds/development/images',
+      style: 'expanded'
+    })
+    .on('error', gutil.log))
+    .pipe(gulp.dest('builds/development/css'))
 });
+
